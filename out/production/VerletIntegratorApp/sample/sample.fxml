@@ -48,14 +48,19 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Krok:" />
                   <TextField fx:id="txtKrok" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[s]" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="tStart:" />
                   <TextField fx:id="txtStart" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[s]" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="tStop:" />
                   <TextField fx:id="txtStop" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[s]" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="x0:" />
                   <TextField fx:id="txtX0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[rad]" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="v0:" />
                   <TextField fx:id="txtV0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[m/s]" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
