@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import sample.src.Analyzer;
 import sample.src.Pendulum;
@@ -83,7 +84,9 @@ public class Controller {
         double l = line.getEndY() - line.getStartY();
 
         path.getElements().add(new MoveTo(l*Math.sin((double)analyzer.getxValues().get(0)),l*cos((double)analyzer.getxValues().get(0))-l));
-
+        Rotate rotate = new Rotate();
+        rotate.setPivotX(line.getStartX());
+        rotate.setPivotY(line.getStartY());
         int n = analyzer.gettValues().size();
         for (int i =1; i < n; i++) {
             double x = l*Math.sin((double)analyzer.getxValues().get(i));
