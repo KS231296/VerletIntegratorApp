@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -7,7 +9,9 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.shape.*;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import sample.src.Analyzer;
 import sample.src.Pendulum;
 import sample.src.VerletIntegrator;
@@ -16,6 +20,7 @@ import sample.src.VerletIntegrator;
 import java.util.ArrayList;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.cos;
 
 public class Controller {
 
@@ -24,6 +29,7 @@ public class Controller {
     private double tStop;
     private double x0;
     private double v0;
+    private Analyzer analyzer;
 
     @FXML
     private Text txtOkres;
@@ -60,6 +66,44 @@ public class Controller {
     private Button btnStart;
 
     @FXML
+    private Button btnAnimate;
+
+    @FXML
+    private Circle circle;
+
+    private ArrayList xVal;
+
+    @FXML
+    private Line line;
+
+
+    @FXML
+    void animate(ActionEvent event) {
+        Path path = new Path();
+        double l = line.getEndY() - line.getStartY();
+
+        path.getElements().add(new MoveTo(l*Math.sin((double)analyzer.getxValues().get(0)),l*cos((double)analyzer.getxValues().get(0))-l));
+
+        int n = analyzer.gettValues().size();
+        for (int i =1; i < n; i++) {
+            double x = l*Math.sin((double)analyzer.getxValues().get(i));
+            double y = l*cos((double)analyzer.getxValues().get(i))-l;
+            path.getElements().add(new LineTo(x, y));
+
+            }
+
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setDuration(Duration.seconds(tStop));
+        pathTransition.setNode(circle);
+        pathTransition.setPath(path);
+        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        pathTransition.setCycleCount(1);
+        pathTransition.setAutoReverse(false);
+        pathTransition.play();
+
+    }
+
+    @FXML
     void start(ActionEvent event) {
 
         try {
@@ -72,7 +116,7 @@ public class Controller {
             new Alert(Alert.AlertType.ERROR, "Przynajmniej jedna z podanych wartości nie jest liczbą").showAndWait();
             return;
         }
-        Analyzer analyzer = new Analyzer();
+        analyzer = new Analyzer();
         Pendulum pendulum = new Pendulum();
         VerletIntegrator integrator = new VerletIntegrator(krok);
 
@@ -105,7 +149,7 @@ public class Controller {
             txtOkres.setText("Nie znaleziono okresu");
         }
 
-
+        btnAnimate.setDisable(false);
     }
 
     public double findEps(ArrayList list) {

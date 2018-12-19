@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
@@ -133,6 +135,17 @@
                               <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                            </padding>
                         </LineChart>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Animation">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Circle fx:id="circle" fill="DODGERBLUE" layoutX="333.0" layoutY="333.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Line fx:id="line" layoutX="333.0" layoutY="333.0" startY="-200.0" />
+                        <Button fx:id="btnAnimate" disable="true" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#animate" text="Animate" />
                      </children>
                   </AnchorPane>
               </content>

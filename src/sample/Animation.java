@@ -18,12 +18,6 @@ public class Animation {
 
     public void drawPendulum(AnchorPane pane, int Xposition, int Yposition, int AnimationDurationTime) {
 
-        /**
-         * By dodać animacje wystarczy np w controllerze wpisac np .  new PendulumAnimation().drawPendulum(pane,750,250 ,6);
-         *
-         *
-         * */
-
         this.x = Xposition;
         this.y = Yposition;
         this.durationtime = AnimationDurationTime;
