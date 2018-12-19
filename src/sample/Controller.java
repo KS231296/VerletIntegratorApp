@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.animation.PathTransition;
+import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,27 +82,29 @@ public class Controller {
     @FXML
     void animate(ActionEvent event) {
         Path path = new Path();
+    //    Path rotation = new Path();
+
         double l = line.getEndY() - line.getStartY();
 
-        path.getElements().add(new MoveTo(l*Math.sin((double)analyzer.getxValues().get(0)),l*cos((double)analyzer.getxValues().get(0))-l));
-        Rotate rotate = new Rotate();
-        rotate.setPivotX(line.getStartX());
-        rotate.setPivotY(line.getStartY());
+        path.getElements().add(new MoveTo(l * Math.sin((double) analyzer.getxValues().get(0)), l * cos((double) analyzer.getxValues().get(0)) - l));
+
         int n = analyzer.gettValues().size();
-        for (int i =1; i < n; i++) {
-            double x = l*Math.sin((double)analyzer.getxValues().get(i));
-            double y = l*cos((double)analyzer.getxValues().get(i))-l;
+        for (int i = 1; i < n; i++) {
+            double x = l * Math.sin((double) analyzer.getxValues().get(i));
+            double y = l * cos((double) analyzer.getxValues().get(i)) - l;
             path.getElements().add(new LineTo(x, y));
-
-            }
-
+        }
+     //   PathTransition lineTransition = new PathTransition();
         PathTransition pathTransition = new PathTransition();
+
         pathTransition.setDuration(Duration.seconds(tStop));
         pathTransition.setNode(circle);
         pathTransition.setPath(path);
         pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
         pathTransition.setCycleCount(1);
         pathTransition.setAutoReverse(false);
+
+
         pathTransition.play();
 
     }
